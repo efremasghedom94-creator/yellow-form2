@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Final Yellow Sheet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; background: #fff8b3; }
+    h1 { text-align: center; background: #f7e36a; padding: 10px; }
+    .field { margin: 15px 0; }
+    .label { font-weight: bold; display: block; }
+    .value { border-bottom: 1px solid #000; min-height: 20px; padding: 5px; }
+    button { margin-top: 30px; padding: 10px 20px; background: #f7e36a; border: none; font-weight: bold; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h1>Booking Appointment – Final Sheet</h1>
+
+  <div id="output"></div>
+
+  <button onclick="window.print()">Save/Print as PDF</button>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("formData") || "{}");
+    const output = document.getElementById("output");
+
+    const fields = {
+      student_name: "Student Name",
+      student_grade: "Student Grade",
+      dob: "Date of Birth",
+      gender: "Gender",
+      parent_name: "Parent Name",
+      relationship: "Relationship to Student",
+      phone: "Phone Number",
+      email: "Email",
+      status: "Immigration Status",
+      doc_number: "Document Number",
+      street: "Street Address",
+      city: "City",
+      postal: "Postal Code",
+      current_school: "Current School",
+      previous_school: "Previous School",
+      catholic: "Is Student Catholic?",
+      notes: "Additional Notes"
+    };
+
+    for (let key in fields) {
+      const div = document.createElement("div");
+      div.className = "field";
+      div.innerHTML = `<span class="label">${fields[key]}:</span><div class="value">${data[key] || ""}</div>`;
+      output.appendChild(div);
+    }
+  </script>
+
+</body>
+</html>
