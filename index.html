@@ -2,126 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Booking Appointment Form (Pages 1–6)</title>
+  <title>Booking Appointment – Form</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
-    h2 { background: #f7e36a; padding: 10px; }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    input, textarea, select { width: 100%; padding: 8px; margin-top: 4px; }
-    .section { margin-bottom: 30px; border-bottom: 2px solid #ddd; padding-bottom: 20px; }
-    .next-btn { background: #f7e36a; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <h1>Information Needed for Booking Appointments & Requests</h1>
 
   <form id="mainForm">
 
     <!-- Page 1: Student Information -->
-    <div class="section">
+    <div class="page" id="page1">
       <h2>Page 1: Student Information</h2>
       <label>Student Name</label>
       <input type="text" name="student_name">
-
       <label>Student Grade</label>
       <input type="text" name="student_grade">
-
       <label>Date of Birth</label>
       <input type="date" name="dob">
-
       <label>Gender</label>
       <select name="gender">
+        <option value="">--Select--</option>
         <option>Male</option>
         <option>Female</option>
         <option>Other</option>
       </select>
+      <button type="button" onclick="goTo(2)">Next</button>
     </div>
 
     <!-- Page 2: Parent Information -->
-    <div class="section">
+    <div class="page" id="page2" style="display:none">
       <h2>Page 2: Parent Information</h2>
       <label>Parent Name</label>
       <input type="text" name="parent_name">
-
-      <label>Relationship to Student</label>
+      <label>Relationship</label>
       <input type="text" name="relationship">
-
       <label>Phone Number</label>
       <input type="tel" name="phone">
-
       <label>Email</label>
       <input type="email" name="email">
+      <button type="button" onclick="goTo(1)">Back</button>
+      <button type="button" onclick="goTo(3)">Next</button>
     </div>
 
     <!-- Page 3: Immigration Status -->
-    <div class="section">
+    <div class="page" id="page3" style="display:none">
       <h2>Page 3: Immigration Status</h2>
       <label>Status</label>
       <select name="status">
+        <option value="">--Select--</option>
         <option>PR</option>
         <option>RC</option>
         <option>SP</option>
         <option>WP</option>
         <option>Other</option>
       </select>
-
       <label>Document Number</label>
       <input type="text" name="doc_number">
+      <button type="button" onclick="goTo(2)">Back</button>
+      <button type="button" onclick="goTo(4)">Next</button>
     </div>
 
     <!-- Page 4: Address -->
-    <div class="section">
+    <div class="page" id="page4" style="display:none">
       <h2>Page 4: Address</h2>
       <label>Street Address</label>
       <input type="text" name="street">
-
       <label>City</label>
       <input type="text" name="city">
-
       <label>Postal Code</label>
       <input type="text" name="postal">
+      <button type="button" onclick="goTo(3)">Back</button>
+      <button type="button" onclick="goTo(5)">Next</button>
     </div>
 
-    <!-- Page 5: School Information -->
-    <div class="section">
+    <!-- Page 5: School Info -->
+    <div class="page" id="page5" style="display:none">
       <h2>Page 5: School Information</h2>
       <label>Current School</label>
       <input type="text" name="current_school">
-
       <label>Previous School</label>
       <input type="text" name="previous_school">
-
       <label>Is Student Catholic?</label>
       <select name="catholic">
+        <option value="">--Select--</option>
         <option>Yes</option>
         <option>No</option>
       </select>
+      <button type="button" onclick="goTo(4)">Back</button>
+      <button type="button" onclick="goTo(6)">Next</button>
     </div>
 
     <!-- Page 6: Notes -->
-    <div class="section">
-      <h2>Page 6: Additional Notes</h2>
-      <label>Notes / Special Requests</label>
+    <div class="page" id="page6" style="display:none">
+      <h2>Page 6: Notes</h2>
+      <label>Additional Notes</label>
       <textarea name="notes"></textarea>
+      <button type="button" onclick="goTo(5)">Back</button>
+      <button type="button" onclick="saveAndGoFinal()">Generate Yellow Form</button>
     </div>
-
-    <button type="button" class="next-btn" onclick="saveForm()">Generate Final Sheet</button>
 
   </form>
 
-  <script>
-    function saveForm() {
-      const formData = {};
-      const inputs = document.querySelectorAll("#mainForm input, #mainForm textarea, #mainForm select");
-      inputs.forEach(input => {
-        formData[input.name] = input.value;
-      });
-      localStorage.setItem("formData", JSON.stringify(formData));
-      window.location.href = "final.html"; // go to final yellow page
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
